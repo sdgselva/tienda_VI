@@ -18,4 +18,25 @@ public class CategoriaService {
         var lista = categoriaRepository.findAll();
         return lista;
     }
+    
+    //Se crea los métodos para un CRUD
+    
+    @Transactional(readOnly=true)
+    public Categoria getCategoria(Categoria categoria){
+        categoria = categoriaRepository.findById(categoria.getIdCategoria()).orElse(null);
+        return categoria;
+    }
+    
+    @Transactional
+    public void delete (Categoria categoria){
+        categoriaRepository.delete(categoria);
+    }
+    
+    public void save (Categoria categoria){
+        //Esta categoria crea un nuevo registro si no se encuentra el id
+        //Si ya existe el registro, se actualiza
+        categoriaRepository.save(categoria);
+    }
+    
+    
 }
